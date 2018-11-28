@@ -1,7 +1,8 @@
 <?php 
-require_once('./vendor/autoload.php')
+require_once('./vendor/autoload.php');
+
 //Namespace
-use \LINE\LINEBot\HTTPClient\CurlhttpClient;
+use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 
@@ -15,7 +16,7 @@ $events = json_decode($content, true);
 
 if(!is_null($events['events'])){
 	//Loop through each event
-	foreach($events['events'|as $event]){
+	foreach ($events['events'] as $event) {
 		//Line API Send a lot of event type
 		if ($event['type'] == 'message') {
 			
@@ -29,11 +30,11 @@ if(!is_null($events['events'])){
 					$respMessage = 'Hello, your message is '. $event['message']['text']; 
 					
 				break;
-				/*case 'image':
+				case 'image':
 					$messageID = $event['message']['id']; 
 					$respMessage = 'Hello, your image ID is '. $messageID;
 					
-				break;*/
+				break;
 				
 					
 			}
@@ -44,7 +45,7 @@ if(!is_null($events['events'])){
 		}
 	}
 }
-/*
+
 //Insert to DB
 $params = array( 
 	'type' => $event['type'],
@@ -56,6 +57,6 @@ $params = array(
 	'replytoken' => $event['replyToken']
 ); 
 $statement = $connection->prepare('INSERT INTO chatlogs (type, userID, time, message_id, message_type, message_text, replytoken) VALUES (:type, :userID, :time, :message_id, :message_type, :message_text, :repltoken)'); 
-$statement->execute($params);*/
+$statement->execute($params);
 ?>
 
