@@ -1,8 +1,8 @@
 <?php 
-require"inc/setting.php";
+require('inc/setting.php');
 
 $content = file_get_contents('php://input');
-$arrayJson = json_decode($content,true);
+$arrayJson = json_decode($content, true);
 
 $arrayHeader = array();
 $arrayHeader[] = "Content-Type: application/json";
@@ -23,6 +23,27 @@ if($message == "สวัสดี"){
 	$arrayPostData['messages'][1]['packageId'] = "2";
 	$arrayPostData['messages'][1]['stickerId'] = "34";
 	pushMsg($arrayHeader,$arrayPostData);
+}
+
+if (!is_null($events['events'])) { 
+	// Loop through each event 
+	foreach ($events['events'] as $event) { 
+		// Line API send a lot of event type, we interested in message only. 
+		if ($event['type'] == 'message') { 
+			switch($event['message']['type']) { 
+			case 'text': 
+				// Get replyToken 
+				$replyToken = $event['replyToken']; 
+				// Reply message 
+				$respMessage = 'Hello, your message is '. $event['message']['text']; 
+				$httpClient = new CurlHTTPClient($channel_token); 
+				$bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret)); 
+				$textMessageBuilder = new TextMessageBuilder($respMessage); 
+				$response = $bot->replyMessage($replyToken, $textMessageBuilder); 
+			break; 
+			} 
+		} 
+	} 
 }
 function pushMsg($arrayHeader,$arrayPostData){
 	$strUrl = "https://api.line.me/v2/bot/message/push";
