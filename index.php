@@ -59,13 +59,15 @@ $params = array(
 	'msgText' => $event['message']['text'],
 	'replyToken' => $event['replyToken']
 ); 
-/*$sql = mysqli_query($connection,"INSERT INTO chatlogs VALUES(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken, NULL )");*/
+$sql = mysqli_query($connection,'INSERT INTO chatlogs (id,userId, time, type, msgId, msgType, msgText, replyToken, msgPic) 
+	VALUES 
+	(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken, NULL)');
 
-$statement = $connection->prepare(
+/*$statement = $connection->prepare(
 	'INSERT INTO chatlogs (id,userId, time, type, msgId, msgType, msgText, replyToken, msgPic) 
 	VALUES 
 	(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken, NULL)'); 
-$statement->execute($params);
+$statement->execute($params);*/
 error_log($message);
 
 function pushMsg($arrayHeader,$arrayPostData){
