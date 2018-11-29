@@ -62,6 +62,7 @@ $statement = $connection->prepare(
 	VALUES 
 	(:userId, :time, :type, :msgId, :msgType, :msgText, :replyToken)'); 
 $statement->execute($params);
+error_log($message);
 
 function pushMsg($arrayHeader,$arrayPostData){
 	$strUrl = "https://api.line.me/v2/bot/message/push";
