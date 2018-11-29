@@ -52,19 +52,21 @@ if (!is_null($events['events'])) {
 //insert message from Line API to DB
 $params = array( 
 	'userId' => $event['source']['userId'], 
-	'time' => $event['timestamp'],
+	/*'time' => $event['timestamp'],*/
+	'time' => date("Y-m-d H:i:s");
 	'type' => $event['type'], 
 	'msgId' => $event['message']['id'],
 	'msgType' => $event['message']['type'],
 	'msgText' => $event['message']['text'],
 	'replyToken' => $event['replyToken']
 ); 
-
+$sql = mysqli_query($connection,"INSERT INTO chatlogs VALUES(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken, NULL )");
+/*
 $statement = $connection->prepare(
 	'INSERT INTO chatlogs (userId, time, type, msgId, msgType, msgText, replyToken) 
 	VALUES 
 	(:userId, :time, :type, :msgId, :msgType, :msgText, :replyToken)'); 
-$statement->execute($params);
+$statement->execute($params);*/
 error_log($message);
 
 function pushMsg($arrayHeader,$arrayPostData){
