@@ -53,7 +53,7 @@ if (!is_null($events['events'])) {
 $params = array( 
 	'userId' => $event['source']['userId'], 
 	/*'time' => $event['timestamp'],*/
-	'time' => date("Y-m-d H:i:s");
+	'time' => date("Y-m-d H:i:s"),
 	'type' => $event['type'], 
 	'msgId' => $event['message']['id'],
 	'msgType' => $event['message']['type'],
