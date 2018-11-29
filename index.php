@@ -1,5 +1,6 @@
 <?php 
 require('inc/setting.php');
+require('inc/connect.php');
 
 $content = file_get_contents('php://input');
 $arrayJson = json_decode($content, true);
@@ -45,6 +46,23 @@ if (!is_null($events['events'])) {
 		} 
 	} 
 }
+
+//insert message from Line API to DB
+$params = array( 
+	'userId' => $event['source']['userId'], 
+	'time' => $event['timestamp'],
+	'type' => $event['type'], 
+	'msgId' => $event['message']['id'],
+	'msgType' => $event['message']['type'],
+	'msgText' => $event['message']['text'],
+	'replyToken' => $event['replyToken'],
+); 
+$statement = $connection->prepare(
+	'INSERT INTO chatlogs (userId, time, type, msgId, msgType, msgText, replyToken) 
+	VALUES 
+	(:userId, :time, :type, :msgId, :msgType, :msgText, :replyToken)'); 
+$statement->execute($params);
+
 function pushMsg($arrayHeader,$arrayPostData){
 	$strUrl = "https://api.line.me/v2/bot/message/push";
 	$ch = curl_init();
