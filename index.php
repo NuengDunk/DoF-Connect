@@ -55,13 +55,17 @@ $params = array(
 	'msgId' => $event['message']['id'],
 	'msgType' => $event['message']['type'],
 	'msgText' => $event['message']['text'],
-	'replyToken' => $event['replyToken'],
+	'replyToken' => $event['replyToken']
 ); 
+$SQL = "INSERT INTO chatlogs (userId, time, type, msgId, msgType, msgText, replyToken) 
+	VALUES ($params[0],$params[1],$params[2],$params[3],$params[4],$params[5],$params[6])";
+$QUERY = pg_query($SQL);
+/*
 $statement = $connection->prepare(
 	'INSERT INTO chatlogs (userId, time, type, msgId, msgType, msgText, replyToken) 
 	VALUES 
 	(:userId, :time, :type, :msgId, :msgType, :msgText, :replyToken)'); 
-$statement->execute($params);
+$statement->execute($params);*/
 error_log($message);
 
 function pushMsg($arrayHeader,$arrayPostData){
