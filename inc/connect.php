@@ -4,7 +4,7 @@ $dbname = 'dof_connect';
 $user = 'nuengdunk'; 
 $pass = '21092528'; 
 $connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
-if (!$conn) {
+if (!$connection) {
   echo "An error occurred.\n";
   exit;
 }
