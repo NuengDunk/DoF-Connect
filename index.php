@@ -1,9 +1,11 @@
 <?php 
 require('inc/setting.php');
 require('inc/connect.php');
+require_once('vendor/linecorp/line-bot-sdk/line-bot-sdk-tiny/LINEBotTiny.php');
 
 $content = file_get_contents('php://input');
 $arrayJson = json_decode($content, true);
+date_default_timezone_set('Asia/Bangkok');
 
 $arrayHeader = array();
 $arrayHeader[] = "Content-Type: application/json";
@@ -64,7 +66,6 @@ $statement = $connection->prepare(
 	(:userId, :time, :type, :msgId, :msgType, :msgText, :replyToken)'); 
 $statement->execute($params);
 error_log($message);
-error_log($statement);
 
 function pushMsg($arrayHeader,$arrayPostData){
 	$strUrl = "https://api.line.me/v2/bot/message/push";
