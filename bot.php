@@ -26,11 +26,12 @@ if (!is_null($events['events'])) {
 					'content' => $appointments[1],
 				);
 				
+		  		
 				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
 				$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
 				$statement->bindParam(':time',$appointments[1]);
-				$result = $statement->excute($params);
+				$statement->excute($params);
 				
 				$respMessage = 'Your appointment has saved';			
 			}else{
