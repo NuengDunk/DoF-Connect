@@ -15,11 +15,32 @@ if (!is_null($events['events'])) {
    $text = $event['message']['text'];
    // Get replyToken
    $replyToken = $event['replyToken'];
+	  
+   //Split message then keep it in database
+   $appointments = explode(',',$event['message']['text']);
+	  if(count($appointments)==2){
+				require_once('./inc/connect.php');
+				$params = array(
+					'uerID' => $event['source']['userId'],
+					'time' => $appointments[0],
+					'content' => $appointments[1],
+				);
+				
+				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
+				$statement->bindParam(':userID',$event['source']['userId']);
+				$statement->bindParam(':time',$appointments[0]);
+				$statement->bindParam(':time',$appointments[1]);
+				$result = $statement->excute($params);
+				
+				$respMessage = 'Your appointment has saved';			
+			}else{
+				$respMessage = 'You can send appointment like this "12:00, Run always"';
+			}
 
    // Build message to reply back
    $messages = [
     'type' => 'text',
-    'text' => $text
+    'text' => $respMessage
    ];
 
    // Make a POST Request to Messaging API to reply to sender
