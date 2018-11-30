@@ -4,4 +4,6 @@ $channel_secret = 'e616ea5c4234eec43f2c453319c9cc0c';
 $pushID = 'Ud2418f311e6d6296461e4b14770984f7';
 $userId = 'Ud2418f311e6d6296461e4b14770984f7';
 
+date_default_timezone_set('Asia/Bangkok');
+
 ?>
