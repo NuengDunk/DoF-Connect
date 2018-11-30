@@ -23,7 +23,7 @@ if (!is_null($events['events'])) {
 				$params = array(
 					'uerID' => $event['source']['userId'],
 					'time' => $appointments[0],
-					'content' => $appointments[1],
+					'content' => $appointments[1]
 				);
 				
 		  		
@@ -31,7 +31,7 @@ if (!is_null($events['events'])) {
 				/*$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
 				$statement->bindParam(':time',$appointments[1]);*/
-				$result = $statement->execute($params);
+				$statement->execute($params);
 				$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';									
 			}else{
 				$respMessage = 'กรุณาแจ้งเหตุการณ์ด้วย format ดังนี้เช่น "12:00,เรือใหญ่จับปลาเล็ก"';
