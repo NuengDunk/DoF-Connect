@@ -1,11 +1,11 @@
 <?php
-require_once('./vendor/autoload.php');
+//require_once('./vendor/autoload.php');
 require('./inc/setting.php');
 
 //Namespace เพื่อเวลาเรียกใช้งานคลาส คำสั่งจะได้สั้นลง
-use \LINE\LINEBot\HTTPclient\CurlHTTPClient;
+/*use \LINE\LINEBot\HTTPclient\CurlHTTPClient;
 use \LINE\LINEBot;
-use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;*/
 
 //Get message from Line API
 $content = file_get_contents('php://input');
@@ -17,6 +17,9 @@ if(!is_null($events['events'])){
 	foreach ($events['events'] as $event) { 
 		// Line API send a lot of event type, we interested in message only. 
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') { 
+			
+			// Get text sent
+   			$text = $event['message']['text'];
 			
 			// Get replyToken 
 			$replyToken = $event['replyToken'];
@@ -33,9 +36,9 @@ if(!is_null($events['events'])){
 				);
 				
 				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
-				$statement->bindParam(':userID',$event['source']['userId']);
+				/*$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
-				$statement->bindParam(':time',$appointments[1]);
+				$statement->bindParam(':time',$appointments[1]);*/
 				$result = $statement->excute($statement);
 				
 				$respMessage = 'Your appointment has saved';			
@@ -43,8 +46,8 @@ if(!is_null($events['events'])){
 				$respMessage = 'You can send appointment like this "12:00, Run always"';
 			}
 			
-			   // Build message to reply back
-		   $messages = [
+			// Build message to reply back
+		   	$messages = [
 			'type' => 'text',
 			'text' => $respMessage
 		   ];
@@ -68,11 +71,12 @@ if(!is_null($events['events'])){
 		   curl_close($ch);
 
 		   echo $result . "\r\n";
+			/*
 			$httpClient = newCurlHTTPClient($channel_token);
 			$bot = newLineBot($httpClient,array('chanelSecret' => $channel_secret));
 			
 			$textMessageBuilder = newTextMessageBuilder($respMessage);
-			$response = $bot -> replyMessage($replyToken, $textMessageBuilder);
+			$response = $bot -> replyMessage($replyToken, $textMessageBuilder);*/
 		}
 	}	
 }
