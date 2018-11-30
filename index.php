@@ -11,7 +11,7 @@ use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 $content = file_get_contents('php://input');
 $evetns = json_decode($content, true);
 
-if(!is_null($evetns['events'])){
+if(!is_null($events['events'])){
 	
 	// Loop through each event 
 	foreach ($events['events'] as $event) { 
