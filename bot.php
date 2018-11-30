@@ -27,7 +27,7 @@ if (!is_null($events['events'])) {
 				);
 				
 		  		
-				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
+				$statement = $connection->prepare("INSERT INTO appointment (userID,time,content) VALUES(:userID,:time,:content)");
 				/*$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
 				$statement->bindParam(':time',$appointments[1]);*/
