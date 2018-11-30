@@ -27,11 +27,11 @@ if (!is_null($events['events'])) {
 				);
 				
 		  		
-				$statement = $connection->prepare("INSERT INTO appointment (userID,time,content) VALUES(:userID,:time,:content)");
+				$statement = "INSERT INTO appointment (userID,time,content) VALUES(:userID,:time,:content)";
 				/*$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
 				$statement->bindParam(':time',$appointments[1]);*/
-				$result = $statement->execute($statement);
+				$result = $statement->exec($statement);
 		  		if($result){
 					$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';						
 				}else{
