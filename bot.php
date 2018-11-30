@@ -32,8 +32,11 @@ if (!is_null($events['events'])) {
 				$statement->bindParam(':time',$appointments[0]);
 				$statement->bindParam(':time',$appointments[1]);*/
 				$result = $statement->execute($statement);
-				
-				$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';			
+		  		if($result){
+					$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';						
+				}else{
+					$respMessage = 'ไม่สามารถบันทึกข้อมูลได้กรุณาลองอีกครั้ง';
+				}			
 			}else{
 				$respMessage = 'กรุณาแจ้งเหตุการณ์ด้วย format ดังนี้เช่น "12:00,เรือใหญ่จับปลาเล็ก"';
 			}
