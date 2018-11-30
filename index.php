@@ -13,12 +13,12 @@ $evetns = json_decode($content, true);
 
 if(!is_null($evetns['events'])){
 	
-	//Loop through each event
-	foreach ($events['events'] as $event) {
-		
-		//Line API send a lot of event type, we interested in message only
-		if($event['type']=='message' && $event['message']['type']=='text'){
-			//Get replyToken
+	// Loop through each event 
+	foreach ($events['events'] as $event) { 
+		// Line API send a lot of event type, we interested in message only. 
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text') { 
+			
+			// Get replyToken 
 			$replyToken = $event['replyToken'];
 			
 			//Split message then keep it in database
