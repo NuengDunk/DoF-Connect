@@ -64,9 +64,9 @@ $params = array(
 	(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken, NULL)');*/
 
 $statement = $connection->prepare(
-	'INSERT INTO chatlogs (id, userId, time, type, msgId, msgType, msgText, replyToken) 
+	'INSERT INTO chatlogs (id, userId, time, type, msgId, msgType, msgText, replyToken, msgPic) 
 	VALUES 
-	(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken)'); 
+	(NULL, :userId, :time, :type, :msgId, :msgType, :msgText, :replyToken, NULL)'); 
 $statement->execute($params);
 error_log($message);
 
