@@ -27,12 +27,8 @@ if (!is_null($events['events'])) {
 				);
 				
 		  		
-				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
-				/*$statement->bindParam(':userID',$event['source']['userId']);
-				$statement->bindParam(':time',$appointments[0]);
-				$statement->bindParam(':time',$appointments[1]);*/
-				$statement->execute($params);
-				$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';									
+				$statement = $connection->prepare("INSERT INTO appointments (id, userID, time, content) VALUES (NULL, :userID, :time, :content)"); $result = $statement->execute($params);
+				$respMessage = 'ขอขอบพระคุณที่แจ้งข้อมูล ข้อความของคุณได้ถูกบันทึกไว้แล้ว';									
 			}else{
 				$respMessage = 'กรุณาแจ้งเหตุการณ์ด้วย format ดังนี้เช่น "12:00,เรือใหญ่จับปลาเล็ก"';
 			}
