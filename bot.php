@@ -31,7 +31,7 @@ if (!is_null($events['events'])) {
 				/*$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
 				$statement->bindParam(':time',$appointments[1]);*/
-				$result = $connection->exec($statement);
+				$result = $connection->query($statement);
 		  		if($result){
 					$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';						
 				}else{
