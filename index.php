@@ -33,7 +33,7 @@ if(!is_null($events['events'])){
 				);
 				
 				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
-				$result -> $statement->excute($params);
+				$result = $statement->excute($params);
 				
 				$respMessage = 'Your appointment has saved';			
 			}else{
