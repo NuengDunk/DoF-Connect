@@ -28,14 +28,14 @@ if (!is_null($events['events'])) {
 				
 		  		
 				$statement = $connection->prepare("INSERT INTO appointment (id,userID,time,content) VALUES(NULL,:userID,:time,:content)");
-				$statement->bindParam(':userID',$event['source']['userId']);
+				/*$statement->bindParam(':userID',$event['source']['userId']);
 				$statement->bindParam(':time',$appointments[0]);
-				$statement->bindParam(':time',$appointments[1]);
-				$statement->excute($params);
+				$statement->bindParam(':time',$appointments[1]);*/
+				$result = $statement->execute($params);
 				
-				$respMessage = 'Your appointment has saved';			
+				$respMessage = 'ข้อความของคุณได้ถูกบันทึกไว้แล้ว';			
 			}else{
-				$respMessage = 'You can send appointment like this "12:00, Run always"';
+				$respMessage = 'กรุณาแจ้งเหตุการณ์ด้วย format ดังนี้เช่น "12:00,เรือใหญ่จับปลาเล็ก"';
 			}
 
    // Build message to reply back
