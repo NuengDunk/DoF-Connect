@@ -25,10 +25,13 @@ if (!is_null($events['events'])) {
 					'time' => $appointments[0],
 					'content' => $appointments[1]
 				);
+		  		$insertDB = "INSERT INTO appointments (id, userID, time, content) VALUES (NULL,:userID,:time,:conent)";
+		  		$insertDBQuery = mysqli_query($connection,$insertDB);
+		  		mysqli_close($connection);
 				
-		  		
+		  		/*
 				$statement = $connection->prepare("INSERT INTO appointments (userID, time, content) VALUES (:userID, :time, :content)"); 
-		  		$result = $statement->execute($params);
+		  		$result = $statement->execute($params);*/
 		  
 				$respMessage = 'ขอขอบพระคุณที่แจ้งข้อมูล ข้อความของคุณได้ถูกบันทึกไว้แล้ว';									
 			}else{
